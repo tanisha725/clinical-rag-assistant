@@ -1,0 +1,82 @@
+services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  # One-off job: pulls the Code Llama model into the shared ollama_data
+  # volume, then exits. llm_service waits for this to finish successfully
+  # before starting, so the very first request doesn't hit a missing model.
+  ollama_pull:
+    image: ollama/ollama
+    depends_on:
+      ollama:
+        condition: service_healthy
+    volumes:
+      - ollama_data:/root/.ollama
+    entrypoint: ["/bin/sh", "-c"]
+    command: >
+      "OLLAMA_HOST=ollama:11434 ollama pull ${OLLAMA_MODEL:-codellama:7b-instruct-q4_K_M}"
+
+  llm_service:
+    build: ./llm_service
+    env_file: .env
+    environment:
+      OLLAMA_URL: http://ollama:11434
+    depends_on:
+      ollama_pull:
+        condition: service_completed_successfully
+
+  # One-off job: builds the vector index from ./docs into the shared
+  # chroma_data volume, then exits. Safe to re-run (ingestion upserts).
+  kb_ingest:
+    build: ./retrieval_service
+    env_file: .env
+    volumes:
+      - ./docs:/app/docs:ro
+      - chroma_data:/app/chroma_db
+    entrypoint: ["python", "ingest.py"]
+
+  retrieval_service:
+    build: ./retrieval_service
+    env_file: .env
+    volumes:
+      - ./docs:/app/docs:ro
+      - chroma_data:/app/chroma_db
+    depends_on:
+      kb_ingest:
+        condition: service_completed_successfully
+
+  app_service:
+    build: ./app_service
+    env_file: .env
+    environment:
+      RETRIEVAL_SERVICE_URL: http://retrieval_service:8000
+      LLM_SERVICE_URL: http://llm_service:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - llm_service
+      - retrieval_service
+
+  frontend:
+    build: ./frontend
+    env_file: .env
+    environment:
+      APP_SERVICE_URL: http://app_service:8000
+    ports:
+      - "7860:7860"
+    depends_on:
+      - app_service
+
+volumes:
+  ollama_data:
+  chroma_data:
