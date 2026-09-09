@@ -16,6 +16,20 @@ RAG off: the question skips retrieval entirely and goes straight to `llm_service
 
 (Full sequence diagrams: ARCHITECTURE.md.)
 
+## "Is the live demo actually running Code Llama?"
+
+Be direct if asked this: **no, not on the current free-tier box.** The documented,
+required architecture uses `codellama:7b-instruct-q4_K_M` (see `.env.example`,
+`docker-compose.yml`, and every other section of this guide) — that's the actual answer
+to "what model does this project use." The live free-tier instance runs a much smaller
+substitute (`qwen2.5:0.5b-instruct`, ~400MB) in a standalone container kept deliberately
+outside the versioned compose files, purely so retrieval/RAG mechanics can be demoed with
+a real generated answer instead of a 502, since a 1GB instance physically cannot run Code
+Llama. State plainly that satisfying the requirement for real needs a bigger instance
+(README.md §15, ~$0.08/hr, a few cents for a session) and that the swap is a one-line
+`.env` change (`OLLAMA_MODEL`/`OLLAMA_URL`) — do not imply the small model meets the
+requirement.
+
 ## "Why Code Llama specifically, and why that tag?"
 
 The assignment requires Code Llama via Ollama. We use

@@ -114,22 +114,35 @@ By explicit choice, this project is currently deployed on a **free-tier `t3.micr
 - `frontend`, `app_service`, `retrieval_service` are deployed and verified working —
   ingestion (8 chunks from 6 PDFs), embedding, vector search, and the RAG context-building
   step all run correctly and were tested end-to-end.
-- **`llm_service` has nothing to talk to.** A free-tier instance has 1GB RAM; even the
-  smallest quantized Code Llama 7B build needs ~4-5GB just for weights, so Ollama is not
-  deployed here. `/health` correctly reports `llm_service` as `"degraded"`, and `/chat`
-  correctly returns HTTP 502 at the final generation step — this is the pipeline failing
-  loudly and honestly at the one step it cannot perform for free, not a bug.
 - Frontend: `http://<instance-public-ip>:7860` (ask for the current IP — EC2 public IPs
   change on stop/start unless an Elastic IP is allocated).
 - Security group allows SSH (22) and Gradio (7860) only from a specific IP, which must be
   updated (`aws ec2 authorize-security-group-ingress`/`revoke-security-group-ingress`) if
   your ISP assigns a new address — home IPs on many ISPs are not static.
 
-**To fully satisfy the assignment's Code Llama requirement**, point `OLLAMA_URL` in `.env`
-at a real Ollama host — either a temporarily-launched paid instance (below, ~$0.08/hr, a
-few cents for a demo session) or a local Ollama running via Docker Desktop on your Mac for
-a one-off test. No code changes are needed either way, since `OLLAMA_URL` is already an
-environment variable end to end.
+#### ⚠️ Known deviation from the assignment: Code Llama is NOT running here
+
+**A free-tier instance cannot run Code Llama.** 1GB RAM is far below the ~4-5GB even the
+smallest quantized Code Llama 7B build needs just for weights. To still get a live,
+working end-to-end demo on this box, a standalone `ollama_smoketest` container was added
+**outside** the versioned compose files, running **`qwen2.5:0.5b-instruct`** (~400MB) — a
+different, much smaller model, chosen only because it was the best-fitting model that
+would actually run in the available RAM (verified stable, ~940MB/2GB swap used under
+load, no crashes).
+
+**This does not satisfy the assignment's explicit Code Llama requirement.** It exists
+purely so the RAG mechanics (retrieval, grounding, RAG-on vs RAG-off) can be demonstrated
+live with a real generated answer instead of a 502. Every other document in this repo
+(`.env.example`, `docker-compose.yml`, `EXERCISES.md`, `VIVA_GUIDE.md`) still specifies
+`codellama:7b-instruct-q4_K_M` as the actual required/documented model — that is what
+should be described as "the model" if asked directly, with this substitution disclosed as
+a budget-driven smoke test, not presented as compliant.
+
+**To actually satisfy the requirement**, point `OLLAMA_URL`/`OLLAMA_MODEL` in `.env` at a
+real Ollama host running Code Llama — either a temporarily-launched paid instance (below,
+~$0.08/hr, a few cents for a demo session) or a local Ollama running via Docker Desktop on
+your Mac for a one-off test. No code changes are needed either way, since both are already
+environment variables end to end.
 
 ### Recommended: one EC2 instance runs the entire stack (paid tier)
 
