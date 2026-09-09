@@ -46,7 +46,7 @@ raw prompt."
 **Objective:** build a real ingestion pipeline that turns the PDF documents in `./docs`
 into a searchable vector index, ready for Exercise 3 to query.
 
-**Documents:** 5 CDC/public-health PDFs in `./docs` — antibiotic safety, C. diff, TB, doxy-PEP, sickle cell disease.
+**Documents:** 6 CDC/public-health PDFs in `./docs` — antibiotic safety (2 documents), C. diff, TB, doxy-PEP, sickle cell disease.
 
 **Text processing:** `retrieval_service/ingest.py::extract_text` uses `pypdf` to pull raw
 text per page; `clean_text` collapses repeated whitespace/blank lines left over from PDF

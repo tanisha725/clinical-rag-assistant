@@ -39,7 +39,7 @@ Toggle "Use RAG" off, ask a question, note the answer and the "RAG OFF" banner (
 sources shown). Toggle it on, ask the *same* question — the UI now shows a "RAG ON"
 banner, the retrieved chunks with a similarity score and originating PDF filename for
 each, and the answer changes to only use facts traceable to those chunks. Ask something
-not covered by any of the 5 PDFs with RAG on — the answer should explicitly say it wasn't
+not covered by any of the 6 PDFs with RAG on — the answer should explicitly say it wasn't
 found in the knowledge base, rather than guessing.
 
 ## "What's your chunking strategy and why those numbers?"

@@ -64,9 +64,9 @@ Ollama runs as a plain `ollama/ollama` container in `docker-compose.yml` with a 
 
 `docs/` (root) and `retrieval_service/docs/` both exist and are near-duplicates:
 - `retrieval_service/docs/` has 4 PDFs.
-- root `docs/` has those same 4 PDFs **plus** a 5th (`AntibioticSafety-Patients-P.pdf`) that is missing from `retrieval_service/docs/`.
+- root `docs/` has those same 4 PDFs **plus 2 more** (`AntibioticSafety-Patients-P.pdf` and `what-you-should-know-about-scd.pdf`) that are missing from `retrieval_service/docs/`.
 
-Since the Dockerfile runs `python build_kb.py` at **image build time** inside `retrieval_service/`, only the 4 PDFs in `retrieval_service/docs/` actually get ingested — the 5th document at the root is silently never indexed. Both `docs/` folders also contain a stray `.DS_Store` (macOS clutter, not filtered — though the loader does skip dotfiles by name check, so it's harmless but should be removed/gitignored).
+Since the Dockerfile runs `python build_kb.py` at **image build time** inside `retrieval_service/`, only the 4 PDFs in `retrieval_service/docs/` actually get ingested — the other 2 documents at the root are silently never indexed. Both `docs/` folders also contain a stray `.DS_Store` (macOS clutter, not filtered — though the loader does skip dotfiles by name check, so it's harmless but should be removed/gitignored).
 
 ## 9. Current chunking
 
@@ -119,7 +119,7 @@ Three near-identical Dockerfiles (`python:3.11-slim`, copy requirements, pip ins
 1. **Service-to-service URLs use `localhost` instead of Docker service names** (`app_service/main.py:15,20`) — breaks all `/chat` calls under `docker-compose`. This is the most severe bug in the repo.
 2. **Wrong model** — `llama3.2:1b` used everywhere instead of the required Code Llama.
 3. **No model pull step** — Ollama container starts with zero models; first real request fails until someone manually pulls a model.
-4. Root `docs/` has 5 PDFs, `retrieval_service/docs/` (the one actually ingested) has only 4 — one document is silently never indexed.
+4. Root `docs/` has 6 PDFs, `retrieval_service/docs/` (the one actually ingested) has only 4 — two documents are silently never indexed.
 5. `response.json()["response"]` in both `llm_service/main.py` and the dead root `main.py` will raise unhandled exceptions if Ollama returns an error payload (e.g., model not found) — surfaces as an opaque 500.
 6. No timeouts on any `requests.post` call — a hung Ollama or retrieval call blocks the request indefinitely.
 7. `retrieval_service`'s `k` parameter is never actually driven by the caller (app_service never passes it), so "configurable top-k" doesn't work end-to-end even though the field exists.
@@ -185,7 +185,7 @@ Concrete fixes to implement next (not done yet — this document is the audit on
 8. Add `.env.example`, wire every URL/model/chunk-size value through environment variables.
 9. Move Ollama + Code Llama to an AWS EC2 instance sized for 7B CPU inference (documented shutdown procedure to avoid idle billing); keep the frontend/app/retrieval services light enough to run locally in Docker or on a small instance.
 10. Add `.gitignore`, `tests/`, `README.md`, `ARCHITECTURE.md`, `API.md`, `EXERCISES.md`, `VIVA_GUIDE.md`.
-11. Clean up: delete `build_kb 2.py`, root `main.py`, root `docs/` (keep `retrieval_service/docs/` as the single source of truth, after copying over the missing 5th PDF), `llm_service/tempCodeRunnerFile.py`, all `__pycache__/` and `.DS_Store` files.
+11. Clean up: delete `build_kb 2.py`, root `main.py`, `retrieval_service/docs/` (keep root `docs/` as the single source of truth, since it's the complete set of 6), `llm_service/tempCodeRunnerFile.py`, all `__pycache__/` and `.DS_Store` files.
 
 ---
 

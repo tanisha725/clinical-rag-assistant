@@ -105,8 +105,37 @@ Then open **http://localhost:7860** in your browser.
 
 ## 15. AWS setup
 
-**[AWS]** Recommended: **one EC2 instance runs the entire stack** (simplest to explain in
-a viva, cheapest to reason about billing for a single demo).
+### Current deployed state (free tier)
+
+By explicit choice, this project is currently deployed on a **free-tier `t3.micro`**
+(1 vCPU / 1GB RAM + 2GB swap, Sydney region `ap-southeast-2`), running
+`docker-compose.aws-free-tier.yml`:
+
+- `frontend`, `app_service`, `retrieval_service` are deployed and verified working —
+  ingestion (8 chunks from 6 PDFs), embedding, vector search, and the RAG context-building
+  step all run correctly and were tested end-to-end.
+- **`llm_service` has nothing to talk to.** A free-tier instance has 1GB RAM; even the
+  smallest quantized Code Llama 7B build needs ~4-5GB just for weights, so Ollama is not
+  deployed here. `/health` correctly reports `llm_service` as `"degraded"`, and `/chat`
+  correctly returns HTTP 502 at the final generation step — this is the pipeline failing
+  loudly and honestly at the one step it cannot perform for free, not a bug.
+- Frontend: `http://<instance-public-ip>:7860` (ask for the current IP — EC2 public IPs
+  change on stop/start unless an Elastic IP is allocated).
+- Security group allows SSH (22) and Gradio (7860) only from a specific IP, which must be
+  updated (`aws ec2 authorize-security-group-ingress`/`revoke-security-group-ingress`) if
+  your ISP assigns a new address — home IPs on many ISPs are not static.
+
+**To fully satisfy the assignment's Code Llama requirement**, point `OLLAMA_URL` in `.env`
+at a real Ollama host — either a temporarily-launched paid instance (below, ~$0.08/hr, a
+few cents for a demo session) or a local Ollama running via Docker Desktop on your Mac for
+a one-off test. No code changes are needed either way, since `OLLAMA_URL` is already an
+environment variable end to end.
+
+### Recommended: one EC2 instance runs the entire stack (paid tier)
+
+**[AWS]** If/when you decide to actually run Code Llama in the cloud: **one EC2 instance
+runs the entire stack** (simplest to explain in a viva, cheapest to reason about billing
+for a single demo).
 
 1. Launch an EC2 instance:
    - AMI: Ubuntu 22.04 LTS
@@ -205,7 +234,15 @@ See [API.md](API.md). Each FastAPI service also serves interactive Swagger docs 
 ## 24. AWS shutdown procedure
 
 See §15 above — always `stop` (or `terminate` at the end of the course) the EC2 instance
-after a demo session.
+after a demo session. **The currently-deployed free-tier `t3.micro` costs $0/hr while
+running** (within the 750 free hrs/month), so there's no billing urgency to stop it, but
+it's still good practice:
+```
+aws ec2 stop-instances --instance-ids <instance-id> --region ap-southeast-2
+```
+If you later launch a paid instance for a live Code Llama demo, stopping it immediately
+after the session is not optional — see the cost figures in the "Recommended" subsection
+of §15.
 
 ## 25. Future improvements
 

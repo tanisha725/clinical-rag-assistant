@@ -1,0 +1,64 @@
+# Free-tier AWS deployment (t2.micro/t3.micro, 1GB RAM).
+#
+# KNOWN LIMITATION: this box does not run Ollama or Code Llama — a free-tier
+# instance has 1GB RAM, and even the smallest quantized Code Llama 7B build
+# needs ~4-5GB just for weights. Only the frontend, orchestration, and
+# retrieval pieces of the pipeline run here; llm_service is deployed but has
+# nothing to talk to, so /generate and RAG answers will return a 502 until
+# OLLAMA_URL is pointed at a real Ollama host (see README.md "AWS setup" for
+# the ~$0.08/hr t3.large option, or run Ollama locally via Docker Desktop on
+# your Mac and set OLLAMA_URL to that host's address for a one-off demo).
+#
+# Run with: docker compose -f docker-compose.aws-free-tier.yml up -d --build
+
+services:
+  kb_ingest:
+    build: ./retrieval_service
+    env_file: .env
+    volumes:
+      - ./docs:/app/docs:ro
+      - chroma_data:/app/chroma_db
+    entrypoint: ["python", "ingest.py"]
+
+  retrieval_service:
+    build: ./retrieval_service
+    env_file: .env
+    volumes:
+      - ./docs:/app/docs:ro
+      - chroma_data:/app/chroma_db
+    depends_on:
+      kb_ingest:
+        condition: service_completed_successfully
+
+  llm_service:
+    build: ./llm_service
+    env_file: .env
+    # No local Ollama on this box. Point at a real Ollama host to enable
+    # generation (see the limitation note above).
+    environment:
+      OLLAMA_URL: ${OLLAMA_URL:-http://localhost:11434}
+
+  app_service:
+    build: ./app_service
+    env_file: .env
+    environment:
+      RETRIEVAL_SERVICE_URL: http://retrieval_service:8000
+      LLM_SERVICE_URL: http://llm_service:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - llm_service
+      - retrieval_service
+
+  frontend:
+    build: ./frontend
+    env_file: .env
+    environment:
+      APP_SERVICE_URL: http://app_service:8000
+    ports:
+      - "7860:7860"
+    depends_on:
+      - app_service
+
+volumes:
+  chroma_data:
