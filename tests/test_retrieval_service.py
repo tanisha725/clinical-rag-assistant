@@ -18,6 +18,7 @@ def client(monkeypatch):
     fake_embeddings = type(sys)("embeddings")
     fake_embeddings.embed_text = lambda text: [0.1, 0.2, 0.3]
     fake_embeddings.embed_texts = lambda texts: [[0.1, 0.2, 0.3] for _ in texts]
+    fake_embeddings.get_embedder = lambda: None
     sys.modules["embeddings"] = fake_embeddings
 
     fake_vector_store = type(sys)("vector_store")

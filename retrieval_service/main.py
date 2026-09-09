@@ -1,16 +1,34 @@
 import logging
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
 from config import DEFAULT_TOP_K
-from embeddings import embed_text
+from embeddings import embed_text, get_embedder
 from vector_store import count, query
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger("retrieval_service")
 
-app = FastAPI(title="Retrieval Service", description="Query embedding + vector similarity search over the clinical knowledge base.")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Loading the model takes several seconds (longer under memory pressure).
+    # Do it once at startup instead of on the first /retrieve call, so the
+    # Docker HEALTHCHECK's start_period covers the cost instead of a real
+    # caller's request timing out.
+    logger.info("Loading embedding model at startup...")
+    get_embedder()
+    logger.info("Embedding model ready.")
+    yield
+
+
+app = FastAPI(
+    title="Retrieval Service",
+    description="Query embedding + vector similarity search over the clinical knowledge base.",
+    lifespan=lifespan,
+)
 
 
 class RetrieveRequest(BaseModel):

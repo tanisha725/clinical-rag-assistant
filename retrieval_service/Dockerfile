@@ -13,7 +13,7 @@ COPY . .
 # The embedding model + chroma index live under /app/chroma_db, which is
 # mounted as a volume in docker-compose.yml so they persist across restarts.
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
     CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)" || exit 1
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

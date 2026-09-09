@@ -4,7 +4,13 @@ import gradio as gr
 import requests
 
 APP_SERVICE_URL = os.getenv("APP_SERVICE_URL", "http://localhost:8000")
-REQUEST_TIMEOUT_SECONDS = int(os.getenv("FRONTEND_TIMEOUT", "150"))
+REQUEST_TIMEOUT_SECONDS = int(os.getenv("FRONTEND_TIMEOUT", "260"))
+
+SLOW_MODEL_NOTE = """
+> ⏳ On resource-constrained hosting, generation can take 20-50+ seconds per answer — this
+> is expected, not a freeze. **Compare** runs two answers sequentially, so allow up to
+> ~2 minutes.
+"""
 
 DESCRIPTION = """
 Ask a clinical/public-health question. Use **Compare RAG ON vs OFF** to see, side by
@@ -69,6 +75,7 @@ def compare(message: str, top_k: int):
 with gr.Blocks(title="Clinical RAG Assistant") as demo:
     gr.Markdown("# Clinical RAG Assistant")
     gr.Markdown(DESCRIPTION)
+    gr.Markdown(SLOW_MODEL_NOTE)
 
     with gr.Tabs():
         with gr.Tab("Compare RAG ON vs OFF"):
