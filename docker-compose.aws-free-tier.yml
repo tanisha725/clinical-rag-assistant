@@ -29,6 +29,7 @@ services:
     depends_on:
       kb_ingest:
         condition: service_completed_successfully
+    restart: unless-stopped
 
   llm_service:
     build: ./llm_service
@@ -37,6 +38,7 @@ services:
     # generation (see the limitation note above).
     environment:
       OLLAMA_URL: ${OLLAMA_URL:-http://localhost:11434}
+    restart: unless-stopped
 
   app_service:
     build: ./app_service
@@ -49,6 +51,7 @@ services:
     depends_on:
       - llm_service
       - retrieval_service
+    restart: unless-stopped
 
   frontend:
     build: ./frontend
@@ -59,6 +62,7 @@ services:
       - "7860:7860"
     depends_on:
       - app_service
+    restart: unless-stopped
 
 volumes:
   chroma_data:
