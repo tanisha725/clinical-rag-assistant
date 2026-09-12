@@ -1,0 +1,43 @@
+{
+  "id": "Q27",
+  "category": "out_of_kb",
+  "question": "What is the treatment for type 2 diabetes?",
+  "in_kb": false,
+  "answer": "The treatment for type 2 diabetes is primarily focused on lifestyle modifications and medication management. While there are specific treatments for type 2 diabetes, such as insulin therapy, oral medications, and sometimes other therapies, the primary focus is on healthy eating habits, regular exercise, and adherence to medical treatment.",
+  "model": "qwen2.5:0.5b-instruct",
+  "used_rag": true,
+  "sources": [
+    "NCHHSTP_DTDTB-Doxy-PEP-Palm-Card_Provider_508_20241112.pdf",
+    "What_You_Need_to_Know_About_TB.pdf",
+    "what-you-should-know-about-scd.pdf"
+  ],
+  "retrieved_context": [
+    {
+      "text": "cells can clog blood flow to the brain and cause a stroke. A stroke can result in lifelong disabilities and learning problems. CS 348718-A 07/24/2024 CDC Division of Blood Disorders and Public Health Genomics How Is Sickle Cell Disease Treated? The goals of treating SCD are to relieve pain and to prevent infections, eye damage, and strokes. There is no single best treatment for all people with SCD. Treatment options are different for each person depending on the symptoms. Treatments can include receiving blood transfusions, maintaining a high fluid intake (drinking 8 to 10 glasses of water each day), receiving IV (intravenous) therapy (fluids given into a vein) and medications to help with pain. For severe SCD, a medicine call hydroxyurea might be recommended. Research suggests that hydroxyurea can reduce the number of painful episodes and the recurrence of ACS. It also can reduce hospital stays and the need for blood transfusions among adults who have SCD. Is There A Cure For Sickle Cell Disease? To date, there are only two potential cures for SCD: a bone marrow or stem cell transplant and gene therapy. Bone Marrow or Stem Cell Transplant \u2022 A bone marrow or stem cell transplant is a procedure that takes healthy stem cells (blood forming cells) from a donor and puts them into someone whose bone marrow is not working properly. These healthy stem cells cbause the bone marrow to make new healthy cells. \u2022 Bone marrow or stem cell transplants are very risky and can have serious side effects, including death. For the transplant to work, the bone marrow must be a close match. For more information visit www.cdc.gov/sicklecell. Gene Therapy In December 2023, the US Food and Drug Administration (FDA) approved two cell-based gene therapies for the treatment of SCD in patients 12 years and older: \u2022 Exagamglogene autotemcel (also known as exa-cel), or CASGEVY\u2122 \u2022 Lovotibeglogene autotemcel (also known as lovo-cel), or LYFGENIA\u2122 Both products are made from the patient\u2019s own blood stem cells, which are modified and are given back as a one-time, single-dose infusion as part of a blood stem cell transplant. Prior to treatment, a patient\u2019s own stem cells are collected, and then the patient must undergo high- dose chemotherapy, a process that removes cells from the patient\u2019s bone marrow so they can be replaced with the modified stem cells. More information about both CASGEVY\u2122 and LYFGENIA\u2122 can be found on the FDA website at https://www.fda.gov/news-events/press-announcements/ fda-approves-first-gene-therapies-treat-patients-sickle- cell-disease and the Sickle Cell Disease Association of America website at https://www.sicklecelldisease.org.",
+      "source": "what-you-should-know-about-scd.pdf",
+      "chunk_id": 1,
+      "similarity": 0.4203251832175487
+    },
+    {
+      "text": "blood tests are the preferred test for people who have received the bacille Calmette-Gu\u00e9rin (BCG) TB vaccine. Unlike the TB skin test, TB blood tests are not affected by BCG vaccination. Many people born outside of the United States have received the BCG TB vaccine. BCG vaccination does not completely prevent people from getting TB. A positive reaction to a TB skin test may be due to the BCG vaccine itself or due to infection with TB germs. TB germs can live in your body for years without causing symptoms. If you have inactive TB, treating it is the best way to protect you from getting sick with active TB disease. If you have been diagnosed with active TB disease, you can be treated with medicine. You will need to take and finish all of your TB medicine as directed by your doctor or nurse. This is to help you feel better and prevent other people from getting sick. The best way to remember to take your medicines for active TB disease is by receiving directly observed therapy (DOT). Through DOT, you will meet with a health care worker every day or several times a week either in-person or virtually. The health care worker will make sure that the TB medicines are working as they should. BCG + -",
+      "source": "What_You_Need_to_Know_About_TB.pdf",
+      "chunk_id": 1,
+      "similarity": 0.3759081407815042
+    },
+    {
+      "text": "PRESCRIBING DOXY PEP TO PREVENT STIS PER CDC GUIDELINES... Discuss doxy PEP with those who would benefit the most If offering, write a prescription for patients to self-administer 200 mg doxycycline within 72 hours after sex, with enough doses until next follow-up visit Offer doxy PEP in the context of comprehensive sexual health approach Did You Know? Doxycycline post-exposure prophylaxis (doxy PEP) has proven to reduce the risk of getting some sexually transmitted infections (STIs) for some people When prescribing dOXy PEP Include These Steps For A Comprehensive Sexual Health Visit Screen for and treat STIs, including viral hepatitis and HIV, as indicated Discuss other prevention strategies \u2022 Condoms \u2022 HIV PEP, PrEP, and treatment \u2022 Vaccinations for: \u2022 Hepatitis A \u2022 Hepatitis B \u2022 Mpox \u2022 Human Papillomavirus Re view patient\u2019s medication list, including over the counter medications, to assess for potential drug interactions Pro vide information on how to take doxy PEP, including how to minimize side effectsSet up r outine follow-up visits Pro vide enough doses of doxy PEP to last until next follow-up visit based on individual sexual frequency",
+      "source": "NCHHSTP_DTDTB-Doxy-PEP-Palm-Card_Provider_508_20241112.pdf",
+      "chunk_id": 0,
+      "similarity": 0.37273621434617266
+    }
+  ],
+  "ollama_latency_seconds": 32.993141673,
+  "wall_clock_seconds": 38.59385061264038,
+  "prompt_tokens": 1309,
+  "completion_tokens": 60,
+  "cpu_avg": 60.28368421052631,
+  "cpu_peak": 139.34,
+  "mem_avg_mib": 435.4526315789474,
+  "mem_peak_mib": 484.8,
+  "samples": 19
+}

@@ -1,0 +1,202 @@
+[
+  {
+    "id": "C01",
+    "question": "Which service calls llm_service?",
+    "ground_truth": "app_service (specifically app_service/services/orchestrator.py, via the _call_llm function which POSTs to LLM_SERVICE_URL/generate).",
+    "retrieved_files": [
+      {
+        "file_path": "llm_service/main.py",
+        "similarity": 0.4829043697083651
+      },
+      {
+        "file_path": "app_service/config.py",
+        "similarity": 0.44770829294670966
+      },
+      {
+        "file_path": "app_service/main.py",
+        "similarity": 0.44516542435776685
+      }
+    ],
+    "answer": "The service calls the `llm_service` service. The relevant code excerpt is:\n\n[app_service/main.py]\napp = FastAPI(\n    title=\"Application / Orchestration Service\",\n    description=\"Receives chat requests, orchestrates retrieval + LLM calls, returns the final answer.\",\n)\n\n\n@app.get(\"/health\")\ndef health():\n    downstream = {}\n    for name, url in [(\"retrieval_service\", RETRIEVAL_SERVICE_URL), (\"llm_service\", LLM_SERVICE_URL)]:\n        try:\n            r = requests.get(f\"{url}/health\", timeout=5)\n            downstream[name] = r.json()\n        except requests.exceptions.RequestException as exc:\n            downstream[name] = {\"status\": \"unreachable\", \"error\": str(exc)}\n    return {\"status\": \"ok\", \"downstream\": downstream}\n\nThis service is the root endpoint, not directly called."
+  },
+  {
+    "id": "C02",
+    "question": "Which file is responsible for vector similarity search?",
+    "ground_truth": "retrieval_service/vector_store.py (the query() function calls collection.query() on ChromaDB).",
+    "retrieved_files": [
+      {
+        "file_path": "retrieval_service/ingest.py",
+        "similarity": 0.39167985305590786
+      },
+      {
+        "file_path": "tests/test_retrieval_service.py",
+        "similarity": 0.38858536966679397
+      },
+      {
+        "file_path": "retrieval_service/vector_store.py",
+        "similarity": 0.3864351908360727
+      }
+    ],
+    "answer": "[vector_store.py]"
+  },
+  {
+    "id": "C03",
+    "question": "What happens after app_service receives a chat request?",
+    "ground_truth": "main.py's /chat endpoint calls services/orchestrator.py's handle_chat(), which either calls llm_service directly (RAG off) or calls retrieval_service then builds a prompt and calls llm_service (RAG on), per app_service/main.py and services/orchestrator.py.",
+    "retrieved_files": [
+      {
+        "file_path": "app_service/main.py",
+        "similarity": 0.4872089730185839
+      },
+      {
+        "file_path": "app_service/services/orchestrator.py",
+        "similarity": 0.42676542189388333
+      },
+      {
+        "file_path": "frontend/main.py",
+        "similarity": 0.41765299430324904
+      }
+    ],
+    "answer": "```python\napp_service/main.py\n```"
+  },
+  {
+    "id": "C04",
+    "question": "Which component builds the RAG prompt that is sent to the LLM?",
+    "ground_truth": "app_service/services/orchestrator.py \u2014 the RAG_SYSTEM_PROMPT template and handle_chat() function construct it from retrieved chunks and the user's question.",
+    "retrieved_files": [
+      {
+        "file_path": "llm_service/main.py",
+        "similarity": 0.4012848746233687
+      },
+      {
+        "file_path": "app_service/services/orchestrator.py",
+        "similarity": 0.38428843727157525
+      },
+      {
+        "file_path": "llm_service/config.py",
+        "similarity": 0.38065632711393577
+      }
+    ],
+    "answer": "[app_service/services/orchestrator.py]\n- app.get(\"/health\")\n- app.post(\"/generate\", response_model=GenerateResponse)\n\n[app_service/services/orchestrator.py]\n- handle_chat\n- llm_service/config.py\n- llm_service/main.py\n- llm_service/services/orchestrator.py"
+  },
+  {
+    "id": "C05",
+    "question": "Which files are involved in turning documents into chunks for the knowledge base?",
+    "ground_truth": "retrieval_service/ingest.py (the ingestion pipeline) and retrieval_service/chunking.py (the chunk_text function it calls).",
+    "retrieved_files": [
+      {
+        "file_path": "retrieval_service/config.py",
+        "similarity": 0.4534106350178813
+      },
+      {
+        "file_path": "retrieval_service/ingest.py",
+        "similarity": 0.4458635881169381
+      },
+      {
+        "file_path": "retrieval_service/chunking.py",
+        "similarity": 0.41088216656259974
+      }
+    ],
+    "answer": "[retrieval_service/config.py]\n[retrieval_service/ingest.py]"
+  },
+  {
+    "id": "C06",
+    "question": "Which test file covers the retrieval service?",
+    "ground_truth": "tests/test_retrieval_service.py (also tests/test_chunking.py covers the chunking logic used by retrieval_service's ingestion).",
+    "retrieved_files": [
+      {
+        "file_path": "tests/test_retrieval_service.py",
+        "similarity": 0.46261031397588115
+      },
+      {
+        "file_path": "tests/conftest.py",
+        "similarity": 0.41195984999400426
+      },
+      {
+        "file_path": "retrieval_service/ingest.py",
+        "similarity": 0.40684105358218153
+      }
+    ],
+    "answer": "The test file that covers the retrieval service is `tests/test_retrieval_service.py`."
+  },
+  {
+    "id": "C07",
+    "question": "Which components would be affected if the chunk_text function is modified?",
+    "ground_truth": "retrieval_service/ingest.py (calls chunk_text during ingestion) and tests/test_chunking.py (tests chunk_text directly); indirectly, retrieval_service/vector_store.py's stored chunks and therefore retrieval quality in retrieval_service/main.py.",
+    "retrieved_files": [
+      {
+        "file_path": "retrieval_service/chunking.py",
+        "similarity": 0.4838753679585783
+      },
+      {
+        "file_path": "tests/test_chunking.py",
+        "similarity": 0.48168183227264116
+      },
+      {
+        "file_path": "retrieval_service/config.py",
+        "similarity": 0.4573922237458533
+      }
+    ],
+    "answer": "The chunk_text function is not directly affected by the modifications in the excerpt. The function is responsible for splitting text into overlapping word-count chunks, but it does not change the underlying data structures or the functions used to achieve this. Therefore, it is not affected by any modifications made to the chunk_text function."
+  },
+  {
+    "id": "C08",
+    "question": "Which module loads the embedding model used for both documents and queries?",
+    "ground_truth": "retrieval_service/embeddings.py (get_embedder(), embed_text(), embed_texts()), used by both retrieval_service/ingest.py and retrieval_service/main.py.",
+    "retrieved_files": [
+      {
+        "file_path": "retrieval_service/embeddings.py",
+        "similarity": 0.5050726644204624
+      },
+      {
+        "file_path": "retrieval_service/config.py",
+        "similarity": 0.43594895740558615
+      },
+      {
+        "file_path": "retrieval_service/vector_store.py",
+        "similarity": 0.4302579729389415
+      }
+    ],
+    "answer": "[retrieval_service/embeddings.py]\nfrom sentence_transformers import SentenceTransformer\n\nfrom config import EMBEDDING_MODEL\n\nget_embedder()"
+  },
+  {
+    "id": "C09",
+    "question": "Which file defines the Ollama API client used to talk to the LLM?",
+    "ground_truth": "llm_service/ollama_client.py (generate_raw() and generate() functions call Ollama's /api/generate).",
+    "retrieved_files": [
+      {
+        "file_path": "llm_service/main.py",
+        "similarity": 0.5888919548890829
+      },
+      {
+        "file_path": "llm_service/ollama_client.py",
+        "similarity": 0.5335486231250776
+      },
+      {
+        "file_path": "llm_service/config.py",
+        "similarity": 0.46780670856994194
+      }
+    ],
+    "answer": "[llm_service/ollama_client.py]"
+  },
+  {
+    "id": "C10",
+    "question": "Which service owns the Gradio user interface?",
+    "ground_truth": "frontend/main.py \u2014 it is the only service with Gradio code; it calls app_service's /chat endpoint over HTTP.",
+    "retrieved_files": [
+      {
+        "file_path": "frontend/main.py",
+        "similarity": 0.4056745334605908
+      },
+      {
+        "file_path": "app_service/main.py",
+        "similarity": 0.3890378858262302
+      },
+      {
+        "file_path": "app_service/config.py",
+        "similarity": 0.3849011506964546
+      }
+    ],
+    "answer": "[frontend/main.py]\nimport os\n\nimport gradio as gr\nimport requests\n\nAPP_SERVICE_URL = os.getenv(\"APP_SERVICE_URL\", \"http://localhost:8000\")\nREQUEST_TIMEOUT_SECONDS = int(os.getenv(\"FRONTEND_TIMEOUT\", \"260\"))\n\nSLOW_MODEL_NOTE = \"\"\"\n> \u23f3 On resource-constrained hosting, generation can take 20-50+ seconds per answer \u2014 this\n> is expected, not a freeze. **Compare** runs two answers sequentially, so allow up to\n> ~2 minutes.\n\"\"\"\n\nDESCRIPTION = \"\"\"\nAsk a clinical/public-health question. Use **Compare RAG ON vs OFF** to see, side by\nside, a plain LLM answer against one grounded in the ingested knowledge base\n(antibiotic safety, C. diff, TB, sickle cell disease, doxy-PEP documents) \u2014 or use\n**Single Query** to toggle RAG on one answer at a time.\n\"\"\"\n\n\ndef _call_chat(message: str, use_rag: bool, top_k: int):\n    \"\"\"Returns (answer, mode_banner, context_display) \u2014 or an error string in `answer`.\"\"\"\n    if not message or not message.strip():\n        return \"Please enter a question.\", \"\", \"\"\n\n    try:\n        r = requests.post(\n            f\"{APP_SERVICE_URL}/chat\",\n            json={\"message\": message, \"use_rag\": use_rag, \"top_k\": top"
+  }
+]

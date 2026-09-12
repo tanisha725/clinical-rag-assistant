@@ -11,7 +11,9 @@ class OllamaError(Exception):
     """Raised when Ollama is unreachable, times out, or returns an error."""
 
 
-def generate(prompt: str) -> str:
+def generate_raw(prompt: str) -> dict:
+    """Returns Ollama's full response dict (answer + timing/token metadata),
+    used both by /generate and by the evaluation harness in evaluation/."""
     try:
         response = requests.post(
             f"{OLLAMA_URL}/api/generate",
@@ -40,4 +42,8 @@ def generate(prompt: str) -> str:
         # Common case: model tag hasn't been pulled yet.
         raise OllamaError(f"Unexpected Ollama response (is model '{OLLAMA_MODEL}' pulled?): {body}")
 
-    return body["response"]
+    return body
+
+
+def generate(prompt: str) -> str:
+    return generate_raw(prompt)["response"]

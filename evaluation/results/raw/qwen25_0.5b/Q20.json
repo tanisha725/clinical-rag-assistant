@@ -1,0 +1,43 @@
+{
+  "id": "Q20",
+  "category": "generation",
+  "question": "Write three bullet points a healthcare provider could use to counsel a patient about doxy PEP.",
+  "in_kb": true,
+  "answer": "For a comprehensive sexual health approach, a healthcare provider could use the following three bullet points to counsel a patient about doxy PEP:\n\n1. **Understanding Sexual Health**: Provide a comprehensive overview of sexual health, including STIs, contraceptive methods, and the importance of safe sex practices.\n2. **Dosage and Administration**: Explain the dosing and administration of doxy PEP to ensure patients understand how to administer the medication safely and effectively within 72 hours after sex.\n3. **Follow-Up Care**: Emphasize the importance of ongoing follow-up visits to monitor the patient's STI status and overall health.",
+  "model": "qwen2.5:0.5b-instruct",
+  "used_rag": true,
+  "sources": [
+    "FS-Cdiff-HealthcareProfessionals-508.pdf",
+    "NCHHSTP_DTDTB-Doxy-PEP-Palm-Card_Provider_508_20241112.pdf",
+    "What_You_Need_to_Know_About_TB.pdf"
+  ],
+  "retrieved_context": [
+    {
+      "text": "PRESCRIBING DOXY PEP TO PREVENT STIS PER CDC GUIDELINES... Discuss doxy PEP with those who would benefit the most If offering, write a prescription for patients to self-administer 200 mg doxycycline within 72 hours after sex, with enough doses until next follow-up visit Offer doxy PEP in the context of comprehensive sexual health approach Did You Know? Doxycycline post-exposure prophylaxis (doxy PEP) has proven to reduce the risk of getting some sexually transmitted infections (STIs) for some people When prescribing dOXy PEP Include These Steps For A Comprehensive Sexual Health Visit Screen for and treat STIs, including viral hepatitis and HIV, as indicated Discuss other prevention strategies \u2022 Condoms \u2022 HIV PEP, PrEP, and treatment \u2022 Vaccinations for: \u2022 Hepatitis A \u2022 Hepatitis B \u2022 Mpox \u2022 Human Papillomavirus Re view patient\u2019s medication list, including over the counter medications, to assess for potential drug interactions Pro vide information on how to take doxy PEP, including how to minimize side effectsSet up r outine follow-up visits Pro vide enough doses of doxy PEP to last until next follow-up visit based on individual sexual frequency",
+      "source": "NCHHSTP_DTDTB-Doxy-PEP-Palm-Card_Provider_508_20241112.pdf",
+      "chunk_id": 0,
+      "similarity": 0.5319496858939557
+    },
+    {
+      "text": "For Healthcare Professionals C. diff infection: Is your patient at risk? Pub ID: 301171 Learn more at cdc.gov/c-diff cdc.gov/antibiotic-use This document is meant to provide general information and does not apply to all clinical scenarios. Always assess the individual patient, use your clinical judgment, and follow your institution\u2019s treatment guidelines and protocols when applicable. Higher-risk antibiotics that are more likely to predispose your patient to C. diff infection include: \u2022 Clindamycin \u2022 Fluoroquinolones (e.g., ciprofloxacin, levofloxacin) \u2022 Third/fourth generation cephalosporins (e.g., cefepime, ceftriaxone, cefdinir, cefixime) Prescribe the most targeted and safe antibiotic. \u2022 In patients with a history of C. diff infection, avoid the use of higher-risk antibiotics when other effective therapy is available. \u2022 If your patient reports a penicillin allergy, determine whether they are truly allergic to decrease unnecessary use of higher-risk antibiotics. Use the shortest effective antibiotic duration. Reassess antibiotic therapy based on your patient\u2019s clinical condition and relevant culture results. 1 2 3 Optimize Antibiotic Therapy To minimize the risk of C. diff infection: Educate Y our Patients When prescribing an antibiotic: \u2022 Educate patients about their risk and symptoms of C. diff infection. \u2022 Counsel patients on how to seek care if symptoms of C. diff infection develop. Extended stay in healthcare settings, such as hospitals and nursing homes Previous history of C. diff infection 65+ Older age Serious underlying or immunocompromising conditions Antibiotic use in the last 3 months Assess the Risk C. diff infection can affect anyone, but some patients are at higher risk \u2014 especially those with the following risk factors:",
+      "source": "FS-Cdiff-HealthcareProfessionals-508.pdf",
+      "chunk_id": 0,
+      "similarity": 0.4130916817978368
+    },
+    {
+      "text": "blood tests are the preferred test for people who have received the bacille Calmette-Gu\u00e9rin (BCG) TB vaccine. Unlike the TB skin test, TB blood tests are not affected by BCG vaccination. Many people born outside of the United States have received the BCG TB vaccine. BCG vaccination does not completely prevent people from getting TB. A positive reaction to a TB skin test may be due to the BCG vaccine itself or due to infection with TB germs. TB germs can live in your body for years without causing symptoms. If you have inactive TB, treating it is the best way to protect you from getting sick with active TB disease. If you have been diagnosed with active TB disease, you can be treated with medicine. You will need to take and finish all of your TB medicine as directed by your doctor or nurse. This is to help you feel better and prevent other people from getting sick. The best way to remember to take your medicines for active TB disease is by receiving directly observed therapy (DOT). Through DOT, you will meet with a health care worker every day or several times a week either in-person or virtually. The health care worker will make sure that the TB medicines are working as they should. BCG + -",
+      "source": "What_You_Need_to_Know_About_TB.pdf",
+      "chunk_id": 1,
+      "similarity": 0.400719631280313
+    }
+  ],
+  "ollama_latency_seconds": 25.937703509,
+  "wall_clock_seconds": 30.7804536819458,
+  "prompt_tokens": 1086,
+  "completion_tokens": 126,
+  "cpu_avg": 60.66333333333334,
+  "cpu_peak": 100.36,
+  "mem_avg_mib": 438.56666666666666,
+  "mem_peak_mib": 465.2,
+  "samples": 15
+}

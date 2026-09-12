@@ -49,7 +49,7 @@ def _call_retrieval(question: str, top_k: int) -> list[SourceChunk]:
     return [SourceChunk(**chunk) for chunk in body.get("chunks", [])]
 
 
-def _call_llm(prompt: str) -> str:
+def _call_llm(prompt: str) -> dict:
     try:
         r = requests.post(
             f"{LLM_SERVICE_URL}/generate",
@@ -60,14 +60,22 @@ def _call_llm(prompt: str) -> str:
     except requests.exceptions.RequestException as exc:
         raise UpstreamServiceError("llm_service", str(exc)) from exc
 
-    return r.json()["answer"]
+    return r.json()
 
 
 def handle_chat(message: str, use_rag: bool, top_k: int) -> ChatResponse:
     if not use_rag:
         logger.info("RAG disabled — sending question directly to the LLM.")
-        answer = _call_llm(message)
-        return ChatResponse(answer=answer, used_rag=False, top_k=top_k)
+        llm_result = _call_llm(message)
+        return ChatResponse(
+            answer=llm_result["answer"],
+            used_rag=False,
+            top_k=top_k,
+            model=llm_result.get("model"),
+            latency_seconds=llm_result.get("latency_seconds"),
+            prompt_tokens=llm_result.get("prompt_tokens"),
+            completion_tokens=llm_result.get("completion_tokens"),
+        )
 
     logger.info("RAG enabled — retrieving top_k=%d chunks.", top_k)
     chunks = _call_retrieval(message, top_k)
@@ -79,13 +87,17 @@ def handle_chat(message: str, use_rag: bool, top_k: int) -> ChatResponse:
         context = "\n\n".join(f"[{c.source}] {c.text}" for c in chunks)
 
     prompt = RAG_SYSTEM_PROMPT.format(context=context, question=message)
-    answer = _call_llm(prompt)
+    llm_result = _call_llm(prompt)
 
     sources = sorted({c.source for c in chunks})
     return ChatResponse(
-        answer=answer,
+        answer=llm_result["answer"],
         used_rag=True,
         top_k=top_k,
         sources=sources,
         retrieved_context=chunks,
+        model=llm_result.get("model"),
+        latency_seconds=llm_result.get("latency_seconds"),
+        prompt_tokens=llm_result.get("prompt_tokens"),
+        completion_tokens=llm_result.get("completion_tokens"),
     )

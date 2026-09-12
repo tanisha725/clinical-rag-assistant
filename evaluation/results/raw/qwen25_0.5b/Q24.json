@@ -1,0 +1,43 @@
+{
+  "id": "Q24",
+  "category": "improvement",
+  "question": "How could the C. diff risk-factor list be reorganized to be easier for a nurse to scan quickly?",
+  "in_kb": true,
+  "answer": "The C. diff risk-factor list can be reorganized to be easier for a nurse to scan quickly by grouping similar risk factors together and placing them in logical categories. For example, the list could be divided into four main categories: age, history, underlying conditions, and vaccine history. Within each category, specific risk factors can be grouped and listed for easy reference and review. Additionally, the list could be organized by severity level to help the nurse quickly identify patients at high risk of C. diff infection. For instance, patients with a history of C. diff infection might be grouped together, followed by patients with other risk factors. This way, the nurse can quickly identify high-risk patients and provide appropriate recommendations for antibiotic therapy.",
+  "model": "qwen2.5:0.5b-instruct",
+  "used_rag": true,
+  "sources": [
+    "AntibioticSafety-Patients-P.pdf",
+    "FS-Cdiff-HealthcareProfessionals-508.pdf",
+    "What_You_Need_to_Know_About_TB.pdf"
+  ],
+  "retrieved_context": [
+    {
+      "text": "For Healthcare Professionals C. diff infection: Is your patient at risk? Pub ID: 301171 Learn more at cdc.gov/c-diff cdc.gov/antibiotic-use This document is meant to provide general information and does not apply to all clinical scenarios. Always assess the individual patient, use your clinical judgment, and follow your institution\u2019s treatment guidelines and protocols when applicable. Higher-risk antibiotics that are more likely to predispose your patient to C. diff infection include: \u2022 Clindamycin \u2022 Fluoroquinolones (e.g., ciprofloxacin, levofloxacin) \u2022 Third/fourth generation cephalosporins (e.g., cefepime, ceftriaxone, cefdinir, cefixime) Prescribe the most targeted and safe antibiotic. \u2022 In patients with a history of C. diff infection, avoid the use of higher-risk antibiotics when other effective therapy is available. \u2022 If your patient reports a penicillin allergy, determine whether they are truly allergic to decrease unnecessary use of higher-risk antibiotics. Use the shortest effective antibiotic duration. Reassess antibiotic therapy based on your patient\u2019s clinical condition and relevant culture results. 1 2 3 Optimize Antibiotic Therapy To minimize the risk of C. diff infection: Educate Y our Patients When prescribing an antibiotic: \u2022 Educate patients about their risk and symptoms of C. diff infection. \u2022 Counsel patients on how to seek care if symptoms of C. diff infection develop. Extended stay in healthcare settings, such as hospitals and nursing homes Previous history of C. diff infection 65+ Older age Serious underlying or immunocompromising conditions Antibiotic use in the last 3 months Assess the Risk C. diff infection can affect anyone, but some patients are at higher risk \u2014 especially those with the following risk factors:",
+      "source": "FS-Cdiff-HealthcareProfessionals-508.pdf",
+      "chunk_id": 0,
+      "similarity": 0.4725429759222718
+    },
+    {
+      "text": "blood tests are the preferred test for people who have received the bacille Calmette-Gu\u00e9rin (BCG) TB vaccine. Unlike the TB skin test, TB blood tests are not affected by BCG vaccination. Many people born outside of the United States have received the BCG TB vaccine. BCG vaccination does not completely prevent people from getting TB. A positive reaction to a TB skin test may be due to the BCG vaccine itself or due to infection with TB germs. TB germs can live in your body for years without causing symptoms. If you have inactive TB, treating it is the best way to protect you from getting sick with active TB disease. If you have been diagnosed with active TB disease, you can be treated with medicine. You will need to take and finish all of your TB medicine as directed by your doctor or nurse. This is to help you feel better and prevent other people from getting sick. The best way to remember to take your medicines for active TB disease is by receiving directly observed therapy (DOT). Through DOT, you will meet with a health care worker every day or several times a week either in-person or virtually. The health care worker will make sure that the TB medicines are working as they should. BCG + -",
+      "source": "What_You_Need_to_Know_About_TB.pdf",
+      "chunk_id": 1,
+      "similarity": 0.4060079888391715
+    },
+    {
+      "text": "CS324608-A When antibiotics are not needed, they won\u2019t help you, and the side e\ufb00ects could cause harm. Ask your healthcare professional about the best way to treat your illness. FOR PATIENTS Antibiotics Can Cause Harm Antibiotics are responsible for almost 1 out of 5 emergency department visits for adverse drug events. Antibiotics are the most common cause of emergency department visits for adverse drug events in children under 18 years of age. To learn more about antibiotic prescribing and use, visit www.cdc.gov/antibiotic-use.",
+      "source": "AntibioticSafety-Patients-P.pdf",
+      "chunk_id": 0,
+      "similarity": 0.3933026624959231
+    }
+  ],
+  "ollama_latency_seconds": 33.187635462,
+  "wall_clock_seconds": 38.78355097770691,
+  "prompt_tokens": 923,
+  "completion_tokens": 146,
+  "cpu_avg": 58.13105263157894,
+  "cpu_peak": 101.39,
+  "mem_avg_mib": 427.8473684210526,
+  "mem_peak_mib": 479.3,
+  "samples": 19
+}

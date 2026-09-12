@@ -1,0 +1,43 @@
+{
+  "id": "Q12",
+  "category": "synthesis",
+  "question": "Which of the documents in the knowledge base discuss risks related to antibiotic use?",
+  "in_kb": true,
+  "answer": "The knowledge base does not discuss risks related to antibiotic use.",
+  "model": "qwen2.5:0.5b-instruct",
+  "used_rag": true,
+  "sources": [
+    "AntibioticSafety-Patients-P.pdf",
+    "Do-I-Need-antibiotics-Infographic-85by55-508.pdf",
+    "FS-Cdiff-HealthcareProfessionals-508.pdf"
+  ],
+  "retrieved_context": [
+    {
+      "text": "CS324608-A When antibiotics are not needed, they won\u2019t help you, and the side e\ufb00ects could cause harm. Ask your healthcare professional about the best way to treat your illness. FOR PATIENTS Antibiotics Can Cause Harm Antibiotics are responsible for almost 1 out of 5 emergency department visits for adverse drug events. Antibiotics are the most common cause of emergency department visits for adverse drug events in children under 18 years of age. To learn more about antibiotic prescribing and use, visit www.cdc.gov/antibiotic-use.",
+      "source": "AntibioticSafety-Patients-P.pdf",
+      "chunk_id": 0,
+      "similarity": 0.4911865908507432
+    },
+    {
+      "text": "For Healthcare Professionals C. diff infection: Is your patient at risk? Pub ID: 301171 Learn more at cdc.gov/c-diff cdc.gov/antibiotic-use This document is meant to provide general information and does not apply to all clinical scenarios. Always assess the individual patient, use your clinical judgment, and follow your institution\u2019s treatment guidelines and protocols when applicable. Higher-risk antibiotics that are more likely to predispose your patient to C. diff infection include: \u2022 Clindamycin \u2022 Fluoroquinolones (e.g., ciprofloxacin, levofloxacin) \u2022 Third/fourth generation cephalosporins (e.g., cefepime, ceftriaxone, cefdinir, cefixime) Prescribe the most targeted and safe antibiotic. \u2022 In patients with a history of C. diff infection, avoid the use of higher-risk antibiotics when other effective therapy is available. \u2022 If your patient reports a penicillin allergy, determine whether they are truly allergic to decrease unnecessary use of higher-risk antibiotics. Use the shortest effective antibiotic duration. Reassess antibiotic therapy based on your patient\u2019s clinical condition and relevant culture results. 1 2 3 Optimize Antibiotic Therapy To minimize the risk of C. diff infection: Educate Y our Patients When prescribing an antibiotic: \u2022 Educate patients about their risk and symptoms of C. diff infection. \u2022 Counsel patients on how to seek care if symptoms of C. diff infection develop. Extended stay in healthcare settings, such as hospitals and nursing homes Previous history of C. diff infection 65+ Older age Serious underlying or immunocompromising conditions Antibiotic use in the last 3 months Assess the Risk C. diff infection can affect anyone, but some patients are at higher risk \u2014 especially those with the following risk factors:",
+      "source": "FS-Cdiff-HealthcareProfessionals-508.pdf",
+      "chunk_id": 0,
+      "similarity": 0.479963889291032
+    },
+    {
+      "text": "Do I really need antibiotics? SAY YES TO ANTIBIOTICS when needed for certain infections caused by bacteria. SAY NO TO ANTIBIOTICS for viruses, such as colds and flu, or runny noses, even if the mucus is thick, yellow or green. Antibiotics also won\u2019t help for some common bacterial infections including most cases of bronchitis, many sinus infections, and some ear infections. Antibiotics are only needed for treating certain infections caused by bacteria. Antibiotics do NOT work on viruses. To learn more about antibiotic prescribing and use, visit www.cdc.gov/antibiotic-use",
+      "source": "Do-I-Need-antibiotics-Infographic-85by55-508.pdf",
+      "chunk_id": 0,
+      "similarity": 0.4387917971728766
+    }
+  ],
+  "ollama_latency_seconds": 5.319582735,
+  "wall_clock_seconds": 8.051879167556763,
+  "prompt_tokens": 798,
+  "completion_tokens": 13,
+  "cpu_avg": 20.0075,
+  "cpu_peak": 42.31,
+  "mem_avg_mib": 455.65,
+  "mem_peak_mib": 468.4,
+  "samples": 4
+}

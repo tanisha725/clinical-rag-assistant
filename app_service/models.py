@@ -21,3 +21,6 @@ class ChatResponse(BaseModel):
     sources: list[str] = []
     retrieved_context: list[SourceChunk] = []
     model: str | None = None
+    latency_seconds: float | None = None
+    prompt_tokens: int | None = None
+    completion_tokens: int | None = None

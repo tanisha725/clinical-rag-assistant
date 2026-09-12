@@ -5,7 +5,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 from config import OLLAMA_MODEL, OLLAMA_URL
-from ollama_client import OllamaError, generate
+from ollama_client import OllamaError, generate_raw
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger("llm_service")
@@ -20,6 +20,11 @@ class GenerateRequest(BaseModel):
 class GenerateResponse(BaseModel):
     answer: str
     model: str
+    # Metadata for the model-comparison evaluation (evaluation/); not used by the
+    # frontend, but harmless additive fields on the existing response contract.
+    latency_seconds: float | None = None
+    prompt_tokens: int | None = None
+    completion_tokens: int | None = None
 
 
 @app.get("/health")
@@ -44,9 +49,16 @@ def health():
 def generate_endpoint(req: GenerateRequest):
     logger.info("Generate request, prompt length=%d chars", len(req.prompt))
     try:
-        answer = generate(req.prompt)
+        raw = generate_raw(req.prompt)
     except OllamaError as exc:
         logger.error("Ollama call failed: %s", exc)
         raise HTTPException(status_code=502, detail=str(exc))
+    answer = raw["response"]
     logger.info("Generation complete, answer length=%d chars", len(answer))
-    return GenerateResponse(answer=answer, model=OLLAMA_MODEL)
+    return GenerateResponse(
+        answer=answer,
+        model=OLLAMA_MODEL,
+        latency_seconds=raw.get("total_duration", 0) / 1e9 if raw.get("total_duration") else None,
+        prompt_tokens=raw.get("prompt_eval_count"),
+        completion_tokens=raw.get("eval_count"),
+    )

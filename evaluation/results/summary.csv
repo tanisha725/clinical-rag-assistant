@@ -1,0 +1,4 @@
+model,questions_completed,avg_correctness_0to2,avg_relevance_0to1,hallucination_rate_pct,avg_latency_seconds,tokens_per_second,avg_prompt_tokens,avg_completion_tokens,avg_cpu_pct,avg_mem_mib,model_load_seconds,status
+qwen2.5:0.5b-instruct,29/29,1.03,0.90,31.0,32.4,3.46,1207.8,112.3,59.6,430.3,~2 (warm),completed full run
+qwen2.5-coder:1.5b-instruct (Code Llama stand-in),0/29 (1 calibration sample),n/a,n/a,n/a,326.7,0.05,38,11,17.9 (avg during attempt),530.8,65.3,INFEASIBLE - could not complete a single generation within any practical timeout
+llama3.2:1b-instruct-q4_K_M,0/29 (1 calibration sample),n/a,n/a,n/a,575.9,0.08,34,43,unmeasured (isolated test),unmeasured (isolated test),40.4,INFEASIBLE - same as above, slightly less severe but still unusable

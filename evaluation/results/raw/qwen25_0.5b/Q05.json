@@ -1,0 +1,42 @@
+{
+  "id": "Q05",
+  "category": "explanation",
+  "question": "What is the difference between latent (inactive) TB and active TB disease?",
+  "in_kb": true,
+  "answer": "The difference between latent TB and active TB disease is that latent TB is not actively spreading and does not cause any symptoms, while active TB disease is actively spreading and causes symptoms.",
+  "model": "qwen2.5:0.5b-instruct",
+  "used_rag": true,
+  "sources": [
+    "What_You_Need_to_Know_About_TB.pdf",
+    "what-you-should-know-about-scd.pdf"
+  ],
+  "retrieved_context": [
+    {
+      "text": "What You Need to Know About Tuberculosis Tuberculosis (TB) is a disease caused by germs that are spread from person to person through the air. TB usually affects the lungs, but it can also affect other parts of the body, such as the brain, the kidneys, or the spine. Not everyone infected with TB germs becomes sick. As a result, two TB-related conditions exist: latent TB infection (or inactive TB) and TB disease. If not treated properly, TB disease can be fatal. The Difference Between Inactive TB and Active TB Disease A Person With Inactive TB \u2022 Has a small amount of TB germs in their body that are alive but inactive. \u2022 Has no symptoms and does not feel sick. \u2022 Cannot spread TB germs to others. \u2022 Usually has a positive TB blood test or TB skin test indicating TB infection. \u2022 Has a normal chest x-ray and a negative sputum smear. \u2022 Needs treatment for inactive TB to prevent active TB disease. A Person With Active TB Disease \u2022 Has a large amount of active TB germs in their body. \u2022 Has symptoms and feels sick. \u2022 May spread TB germs to others. \u2022 Usually has a positive TB blood test or TB skin test indicating TB infection. \u2022 May have an abnormal chest x-ray, or positive sputum smear or culture. \u2022 Needs treatment for active TB disease. If your body cannot stop TB germs from growing, you develop active TB disease. Symptoms of active TB disease include: A cough that lasts 3 weeks or longer Coughing up blood or sputum Weakness or fatigue Chest pain Fever Chills Night sweats Loss of appetite Weight loss U.S. Department of Health and Human Services Centers for Disease Control and Prevention 301332 | October 2023 TB Can Be Treated Testing for TB Getting tested and treated for TB can protect yourself, your family and friends, and your community. There are two types of tests for TB infection: the TB blood test and the TB skin test. A Positive Test For TB Infection You have TB germs in your body. Your doctor will do other tests to determine if you have inactive TB or active TB disease. These tests may include a chest x-ray, and a test of the sputum you cough up. A Negative Test For TB Infection A negative test means you likely do not have inactive TB or active TB disease. Your doctor may do more tests if: \u2022 You have symptoms of active TB disease, like coughing, chest pain, fever, weight loss, or tiredness. \u2022 You have HIV infection. \u2022 Your exposure to TB germs was recent. Tell Your Doctor if You Received a TB Vaccine TB blood tests are the preferred test for people who have received the bacille Calmette-Gu\u00e9rin (BCG) TB vaccine. Unlike the TB skin test, TB blood tests are not affected by BCG vaccination. Many people born outside of the United States have received the BCG TB vaccine. BCG vaccination does not completely",
+      "source": "What_You_Need_to_Know_About_TB.pdf",
+      "chunk_id": 0,
+      "similarity": 0.5935406555095653
+    },
+    {
+      "text": "blood tests are the preferred test for people who have received the bacille Calmette-Gu\u00e9rin (BCG) TB vaccine. Unlike the TB skin test, TB blood tests are not affected by BCG vaccination. Many people born outside of the United States have received the BCG TB vaccine. BCG vaccination does not completely prevent people from getting TB. A positive reaction to a TB skin test may be due to the BCG vaccine itself or due to infection with TB germs. TB germs can live in your body for years without causing symptoms. If you have inactive TB, treating it is the best way to protect you from getting sick with active TB disease. If you have been diagnosed with active TB disease, you can be treated with medicine. You will need to take and finish all of your TB medicine as directed by your doctor or nurse. This is to help you feel better and prevent other people from getting sick. The best way to remember to take your medicines for active TB disease is by receiving directly observed therapy (DOT). Through DOT, you will meet with a health care worker every day or several times a week either in-person or virtually. The health care worker will make sure that the TB medicines are working as they should. BCG + -",
+      "source": "What_You_Need_to_Know_About_TB.pdf",
+      "chunk_id": 1,
+      "similarity": 0.5256355012122693
+    },
+    {
+      "text": "CDC Division of Blood Disorders and Public Health Genomics What Y ou Should Know About Sickle Cell Disease What Is Sickle Cell Disease? Sickle cell disease (SCD) is a group of inherited red blood cell disorders. \u2022 Healthy red blood cells are round and they move through small blood vessels carrying oxygen to all parts of the body. \u2022 In SCD, the red blood cells become hard and sticky and look like a C-shaped farm tool called a \u201csickle\u201d. \u2022 Sickle cells die early, which causes a constant shortage of red blood cells. \u2022 Sickle cells can get stuck in small blood vessels and block the flow of blood and oxygen to organs in the body. These blockages cause repeated episodes of severe pain, organ damage, serious infections, or even stroke. What Causes Sickle Cell Disease? SCD is inherited in the same way that people get the color of their eyes, skin, and hair. \u2022 A person with SCD is born with it. \u2022 People cannot catch SCD from being around a person who has it. Who Is Affected By Sickle Cell Disease? \u2022 It is estimated that SCD affects 90,000 to 100,000 people in the United States, mainly Blacks or African Americans. \u2022 The disease occurs among about 1 of every 500 Black or African-American births and among about 1 out of every 16,300 Hispanic-American births. \u2022 SCD affects millions of people throughout the world and is particularly common among those whose ancestors come from sub-Saharan Africa; regions in the Western Hemisphere (South America, the Caribbean, and Central America); Saudi Arabia; India; and Mediterranean countries such as Turkey, Greece, and Italy. What Health Problems Does Sickle Cell Disease Cause? Following are some of the most common complications of SCD: \u201cPain Episode\u201d or \u201cCrisis\u201d: Sickle cells don\u2019t move easily through small blood vessels and can get stuck and clog blood flow. This causes pain that can start suddenly, be mild to severe, and last for any length of time. Infection: People with SCD, especially infants and children, are more likely to experience harmful infections such as flu, meningitis, and hepatitis. Hand-Foot Syndrome: Swelling in the hands and feet, often along with a fever, is caused by the sickle cells getting stuck in the blood vessels and blocking the blood from flowing freely through the hands and feet. Eye Disease: SCD can affect the blood vessels in the eye and lead to long term damage. Acute Chest Syndrome (ACS): Blockage of the flow of blood to the lungs can cause acute chest syndrome. ACS is similar to pneumonia; symptoms include chest pain, coughing, difficulty breathing, and fever. It can be life threatening and should be treated in a hospital. Stroke: Sickle cells can clog blood flow to the brain and cause a stroke. A stroke can result in lifelong disabilities and learning problems. CS 348718-A 07/24/2024 CDC Division of Blood Disorders and Public Health Genomics How Is Sickle Cell Disease Treated? The goals of treating SCD are to relieve pain and",
+      "source": "what-you-should-know-about-scd.pdf",
+      "chunk_id": 0,
+      "similarity": 0.39923259150106183
+    }
+  ],
+  "ollama_latency_seconds": 10.298186904,
+  "wall_clock_seconds": 16.75226354598999,
+  "prompt_tokens": 1692,
+  "completion_tokens": 36,
+  "cpu_avg": 39.02625,
+  "cpu_peak": 135.81,
+  "mem_avg_mib": 427.325,
+  "mem_peak_mib": 447.8,
+  "samples": 8
+}

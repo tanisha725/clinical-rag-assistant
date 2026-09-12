@@ -1,0 +1,43 @@
+{
+  "id": "Q08",
+  "category": "retrieval",
+  "question": "What risk factors make a patient more likely to get C. diff infection?",
+  "in_kb": true,
+  "answer": "Based on the context provided, the patient at risk for getting C. diff infection is a patient with the following risk factors:\n\n1. Previous history of C. diff infection\n2. Older age\n3. Serious underlying or immunocompromising conditions (e.g., HIV, hepatitis, HIV, HIV, Human Papillomavirus)\n\nThese risk factors can increase a patient's likelihood of developing C. diff infection by making them more susceptible to the bacterial infection.",
+  "model": "qwen2.5:0.5b-instruct",
+  "used_rag": true,
+  "sources": [
+    "AntibioticSafety-Patients-P.pdf",
+    "FS-Cdiff-HealthcareProfessionals-508.pdf",
+    "NCHHSTP_DTDTB-Doxy-PEP-Palm-Card_Provider_508_20241112.pdf"
+  ],
+  "retrieved_context": [
+    {
+      "text": "For Healthcare Professionals C. diff infection: Is your patient at risk? Pub ID: 301171 Learn more at cdc.gov/c-diff cdc.gov/antibiotic-use This document is meant to provide general information and does not apply to all clinical scenarios. Always assess the individual patient, use your clinical judgment, and follow your institution\u2019s treatment guidelines and protocols when applicable. Higher-risk antibiotics that are more likely to predispose your patient to C. diff infection include: \u2022 Clindamycin \u2022 Fluoroquinolones (e.g., ciprofloxacin, levofloxacin) \u2022 Third/fourth generation cephalosporins (e.g., cefepime, ceftriaxone, cefdinir, cefixime) Prescribe the most targeted and safe antibiotic. \u2022 In patients with a history of C. diff infection, avoid the use of higher-risk antibiotics when other effective therapy is available. \u2022 If your patient reports a penicillin allergy, determine whether they are truly allergic to decrease unnecessary use of higher-risk antibiotics. Use the shortest effective antibiotic duration. Reassess antibiotic therapy based on your patient\u2019s clinical condition and relevant culture results. 1 2 3 Optimize Antibiotic Therapy To minimize the risk of C. diff infection: Educate Y our Patients When prescribing an antibiotic: \u2022 Educate patients about their risk and symptoms of C. diff infection. \u2022 Counsel patients on how to seek care if symptoms of C. diff infection develop. Extended stay in healthcare settings, such as hospitals and nursing homes Previous history of C. diff infection 65+ Older age Serious underlying or immunocompromising conditions Antibiotic use in the last 3 months Assess the Risk C. diff infection can affect anyone, but some patients are at higher risk \u2014 especially those with the following risk factors:",
+      "source": "FS-Cdiff-HealthcareProfessionals-508.pdf",
+      "chunk_id": 0,
+      "similarity": 0.589925818505169
+    },
+    {
+      "text": "CS324608-A When antibiotics are not needed, they won\u2019t help you, and the side e\ufb00ects could cause harm. Ask your healthcare professional about the best way to treat your illness. FOR PATIENTS Antibiotics Can Cause Harm Antibiotics are responsible for almost 1 out of 5 emergency department visits for adverse drug events. Antibiotics are the most common cause of emergency department visits for adverse drug events in children under 18 years of age. To learn more about antibiotic prescribing and use, visit www.cdc.gov/antibiotic-use.",
+      "source": "AntibioticSafety-Patients-P.pdf",
+      "chunk_id": 0,
+      "similarity": 0.49909638417151203
+    },
+    {
+      "text": "PRESCRIBING DOXY PEP TO PREVENT STIS PER CDC GUIDELINES... Discuss doxy PEP with those who would benefit the most If offering, write a prescription for patients to self-administer 200 mg doxycycline within 72 hours after sex, with enough doses until next follow-up visit Offer doxy PEP in the context of comprehensive sexual health approach Did You Know? Doxycycline post-exposure prophylaxis (doxy PEP) has proven to reduce the risk of getting some sexually transmitted infections (STIs) for some people When prescribing dOXy PEP Include These Steps For A Comprehensive Sexual Health Visit Screen for and treat STIs, including viral hepatitis and HIV, as indicated Discuss other prevention strategies \u2022 Condoms \u2022 HIV PEP, PrEP, and treatment \u2022 Vaccinations for: \u2022 Hepatitis A \u2022 Hepatitis B \u2022 Mpox \u2022 Human Papillomavirus Re view patient\u2019s medication list, including over the counter medications, to assess for potential drug interactions Pro vide information on how to take doxy PEP, including how to minimize side effectsSet up r outine follow-up visits Pro vide enough doses of doxy PEP to last until next follow-up visit based on individual sexual frequency",
+      "source": "NCHHSTP_DTDTB-Doxy-PEP-Palm-Card_Provider_508_20241112.pdf",
+      "chunk_id": 0,
+      "similarity": 0.4506245949345755
+    }
+  ],
+  "ollama_latency_seconds": 16.822575181,
+  "wall_clock_seconds": 18.94288396835327,
+  "prompt_tokens": 942,
+  "completion_tokens": 94,
+  "cpu_avg": 68.30199999999999,
+  "cpu_peak": 101.75,
+  "mem_avg_mib": 443.53999999999996,
+  "mem_peak_mib": 454.3,
+  "samples": 10
+}

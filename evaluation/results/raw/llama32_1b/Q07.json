@@ -1,0 +1,10 @@
+{
+  "id": "Q07",
+  "error": "HTTP 502: {\"detail\":\"llm_service is unavailable: HTTPConnectionPool(host='llm_service', port=8000): Read timed out. (read timeout=120)\"}",
+  "wall_clock_seconds": 127.51110219955444,
+  "cpu_avg": 18.352419354838712,
+  "cpu_peak": 71.25,
+  "mem_avg_mib": 521.5048387096773,
+  "mem_peak_mib": 601.7,
+  "samples": 62
+}
